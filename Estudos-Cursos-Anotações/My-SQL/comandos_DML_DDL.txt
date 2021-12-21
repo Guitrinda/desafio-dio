@@ -1,0 +1,183 @@
+USE curso;
+
+CREATE TABLE funcionarios
+(
+ID INT NOT NULL AUTO_INCREMENT,
+NOME VARCHAR(50) NOT NULL,
+SALARIO DECIMAL(10,2),
+SETOR VARCHAR(30),
+PRIMARY KEY(ID)
+);
+
+SELECT * FROM funcionarios
+
+-- comando insert
+
+INSERT INTO funcionarios (nome,salario,setor) VALUES
+('Joao',1000,' '),('Jose',2000,' '),('Alexandre',3000,' ');
+
+-- OU
+INSERT INTO funcionarios (nome,salario) VALUES ('Pedro',1000);
+INSERT INTO funcionarios (nome,salario) VALUES ('Cleiton',1000);
+
+-- DML UPDATE  SEMPRE USAR O WHERE!!!!!
+UPDATE funcionarios SET salario = 1500
+WHERE id=1;
+
+-- OU aumento de 50% sobre salario atual
+UPDATE funcionarios SET salario=salario*1.5
+WHERE id='2';
+
+-- exemplo update com mais de um campo
+UPDATE funcionarios SET salario=salario*1.5,setor='TI'
+WHERE id<>'1';
+
+-- DML DELETE
+DELETE 
+FROM funcionarios
+WHERE id='1';
+
+SELECT * FROM funcionarios
+
+
+CREATE TABLE funcionario
+(	matricula INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	nome 			VARCHAR(50) NOT NULL,
+	sobrenome 	VARCHAR(50) NOT NULL,
+	endereco 	VARCHAR(50),
+	cidade		VARCHAR(50),
+	pais			VARCHAR(25),
+	data_nasc	DATETIME
+	);
+
+-- DDL CRIANDO TABELA COM CHAVE ESTRANGEIRA
+CREATE TABLE salario
+(
+	matricula INT NOT NULL,
+	salario DECIMAL(10,2) NOT NULL,
+	 FOREIGN KEY(matricula) REFERENCES funcionario(matricula)
+ );		 
+ 
+ 
+ -- DDL CRIACAO DE TABELA COM CHAVE PRIMARIA
+ CREATE TABLE audit_salario
+  (
+  		transacao 	INT NOT NULL AUTO_INCREMENT,
+  		matricula 	INT NOT NULL,
+  		data_trans 	DATETIME NOT NULL,
+  		sal_antigo 	DECIMAL(10,2),
+  		sal_novo 	DECIMAL(10,2),
+  		Usuario 		VARCHAR(20)NOT NULL,
+  		PRIMARY KEY(transacao),
+  		FOREIGN KEY(matricula) REFERENCES funcionario(matricula)
+  	);	
+
+
+-- ddl criacao de index
+CREATE INDEX ix_func1 ON funcionario(data_nasc);
+
+-- ddl  CRIACAO DE INDEX
+CREATE INDEX ix_func2 ON funcionario(cidade,pais);
+
+-- ADICIONANDO CAMPO NA TABELA
+ALTER TABLE funcionario ADD genero CHAR(1);
+
+SELECT * FROM funcionario
+
+-- Renomeando campo/colunas da tabela
+ALTER TABLE funcionario CHANGE genero sexo CHAR(1);
+
+-- Retornando situacao anterior
+ALTER TABLE funcionario CHANGE sexo genero CHAR(1);
+
+-- renomear tabela
+RENAME TABLE funcionario TO pessoa;
+-- retornando situacao
+RENAME TABLE pessoa TO funcionario;
+
+SELECT * FROM funcionario;
+
+
+-- ddl para adicionar coluna ta tab senso
+ALTER TABLE senso ADD id INT;
+
+SELECT * FROM senso;
+
+-- DDL para adicionar chave primariana tab SENSO como auto_increment (MODIFICAR COLUNA)
+ALTER TABLE senso MODIFY COLUMN id INT AUTO_INCREMENT PRIMARY KEY;
+
+ -- alterando tio de coluna
+ ALTER TABLE funcionario MODIFY COLUMN endereco VARCHAR(30);
+ 
+ -- excluindo coluna
+ ALTER TABLE funcionario DROP COLUMN genero;
+
+SELECT * FROM funcionario
+
+-- alterar Engine da tabela
+ALTER TABLE senso
+ENGINE = MYISAM;
+
+-- DDL CRIACAO DE DATABASE
+CREATE DATABASE teste;
+
+-- excluindo database
+DROP DATABASE teste;
+
+-- excluindo table
+DROP TABLE salario
+
+-- criacao de view
+CREATE VIEW v_funcionario
+	as
+	SELECT * FROM funcionarios
+
+SELECT * FROM v_funcionario
+
+-- alterar viewe
+ALTER VIEW v_funcionario
+AS
+SELECT id,nome FROM funcionarios;
+
+-- excluir view
+DROP VIEW v_funcionario;
+
+-- excluindo index
+DROP INDEX ix_func1 ON funcionario;
+
+-- criando index
+CREATE INDEX ix_func1 ON funcionarios (nome)
+
+-- criando tabela temporaria bk de funcionarios
+CREATE TEMPORARY TABLE tmp_funcionarios
+(
+id 		INT,
+nome		VARCHAR(50),
+salario	DECIMAL(10,2),
+setor		VARCHAR(30)
+);
+
+-- fazendo bk na tabela temporaria
+INSERT INTO tmp_funcionarios
+SELECT * FROM funcionarios
+
+SELECT * FROM tmp_funcionarios
+
+-- truncate na tabela funcionarios -- apagando registros
+TRUNCATE funcionarios
+SELECT * FROM funcionarios;
+
+-- recuperar dados da tabela temp
+-- desativar auto increment da tabela funcionarios para não gerar inconsistências ao retornar os valores da tmp
+
+ALTER TABLE funcionarios CHANGE id id INT UNSIGNED NOT NULL;
+
+-- recuperando dados do bk temporario
+INSERT INTO funcionarios
+SELECT * FROM tmp_funcionarios;
+
+SELECT * FROM funcionarios;
+
+-- retornando autoincrement
+ALTER TABLE funcionarios modify column id int AUTO_INCREMENT;
+

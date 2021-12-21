@@ -1,0 +1,103 @@
+body{
+					
+			font-family: arial;
+			font-size: 16px;
+			text-align: justify;
+			padding: 1%;
+			background-color: #483D8B;
+
+				}	
+		#whats{
+			text-align: right;
+		}
+		#instagram{
+			text-align: right;
+		}		
+		#img-topo{
+			text-align: center;
+		}
+		h1{
+			text-align: center;
+			font-family: Calibri;
+			font-size: 20px;
+			color: #fff;
+			background: #483D8B;
+		}
+		h2{
+			text-align: center;
+			color: #483D8B;
+		}
+		h3{
+			text-align: center;
+		}
+		nav{
+			text-align: center;
+		}
+		header{
+			text-align: center;
+		}
+		.conteudo{
+			padding: 2%;
+		}
+		a:link{
+			text-decoration: none;
+		}
+		a:visited{
+			text-decoration: none;
+		}
+		a: active{
+			text-decoration: none;
+		}
+		a:hover{
+			background-color: #000;
+			color: #87CEEB;
+		}
+		#grade{
+			display: grid;
+			grid-template-areas: "imagem texto";
+		}
+		#luis{
+			border-radius: 50%;
+		}
+		#criador{
+			background-color: #483D8B;
+			text-align: center;
+			padding: 1%;
+		}
+		h4{
+			color: #fff;
+			font-size: 20px;
+		}
+		#logo-rodape{
+			border-radius: 10%;
+		}
+
+		footer{
+			background-color:#483D8B ;
+			text-align: center;
+			color: #fff;
+			padding: 1%;
+		}
+
+		hr{
+			width: 70%;
+			border-color:#483D8B ;
+		}
+
+		hr.bco{
+			width: 70%;
+			border-color:#fff ;
+		}
+		.imagem{
+			
+			text-align: center;
+		}
+		.texto{
+			
+			text-align: center;}
+		#container{
+			background: #fff;
+			padding: 1px;
+			box-shadow: 2px 2px 2px #fff;
+
+		}	

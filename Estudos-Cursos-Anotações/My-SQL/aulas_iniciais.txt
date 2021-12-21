@@ -1,0 +1,165 @@
+-- SELECT * FROM senso
+
+-- usando operador =
+
+SELECT * FROM senso
+WHERE cod_uf ='35'
+AND ano='2014';
+
+-- usando operador =
+
+SELECT * FROM senso
+WHERE nome_mun ='Dourado'
+AND cod_uf ='35'
+AND ano='2014';
+
+-- operador >
+
+SELECT * FROM senso
+WHERE populacao > 100000
+AND ano='2014';
+
+-- usando operador >
+SELECT * FROM senso
+WHERE populacao > 1000000
+AND cod_uf='35'
+AND ano='2014';
+
+-- Usando operador <
+
+SELECT * FROM senso
+WHERE populacao < 10000
+AND ano='2014';
+
+SELECT * FROM senso
+WHERE populacao <= 50000
+AND ano='2014';
+
+-- usando operador <> diferente
+
+SELECT * FROM senso
+WHERE (cod_uf = '35' or cod_uf = '14')
+AND ano='2014';
+
+
+ -- Combinando operadores
+ 
+ SELECT * FROM senso
+ WHERE populacao <= 100000
+ 	AND populacao <= 50000
+ 	AND cod_uf = '35'
+ 	AND nome_mun <> 'Vinhedo'
+ 		AND ano='2014';
+
+
+-- Operadores
+
+SELECT 1+3 AS retorno;
+SELECT 1*3 AS retorno;
+SELECT 5-2 AS retorno;
+SELECT 2-5 AS retorno;
+SELECT ((1+4)*(3*3))/5 AS retorno;
+
+-- script projetando acrescimo de 10% população
+
+SELECT nome_mun, populacao,
+	populacao*1.10 AS pop_projecao
+	FROM senso
+	WHERE ano='2014';
+	
+	-- script projetando acrescimo de 10% população
+SELECT nome_mun, populacao,
+	populacao*0.10 AS acrescimo,
+	populacao+(populacao*0.10) projecao_pop
+	FROM senso
+	WHERE ano='2014';
+	
+	-- Operador Between
+	
+	SELECT * FROM senso
+	WHERE cod_uf='35'
+	AND populacao BETWEEN 5000 AND 10000
+	AND ano='2014'
+	ORDER BY populacao DESC;
+	
+	-- operador IN
+	SELECT * FROM senso
+	WHERE cod_uf IN ('35','12')
+	AND ano='2014'
+	
+	-- not in
+		SELECT * FROM senso
+	WHERE cod_uf not IN ('35','12')
+	AND ano='2014'
+	
+	-- LIKE LOCALIZA VALORES QUE CONTENHAM "OR" EM QUALQUER LUGAR
+	SELECT * FROM senso
+	WHERE nome_mun LIKE ('%or%')
+	AND ano='2014';
+	
+	-- LIKE Encontra quaisquer valores que tenham "r" na segunda posição
+		SELECT * FROM senso
+	WHERE nome_mun LIKE '_r%'
+	AND ano='2014';
+	
+-- LIKE localiza valores que começam com a letra "a" e possuem pelo menos 3 caracteres de comprimento	
+	SELECT * FROM senso
+	WHERE nome_mun LIKE 'a_%_%'
+	AND ano='2014';
+	
+	-- LIKE localiza valores qye começam com "a" e terminam com "o"
+	SELECT * FROM senso
+	WHERE nome_mun LIKE 'a%o'
+	AND ano='2014';
+	
+	-- LIKE CORINGA __
+	
+	SELECT * FROM senso
+	WHERE nome_mun LIKE '_ra%'
+	AND ano='2014';
+	
+	-- operador not
+	
+	SELECT ano, cod_uf, estado, nome_mun, populacao FROM senso
+	WHERE nome_mun NOT LIKE ('A%')
+	AND cod_uf='35'
+	AND NOT populacao <40000
+	AND ano='2014';
+	
+	-- operador or
+	SELECT * FROM senso
+	WHERE nome_mun LIKE ('A%')
+	AND (cod_uf='35' OR cod_uf='15');
+	
+	-- operador is not null
+	SELECT * FROM senso
+	WHERE regiao IS NOT NULL;
+	
+	-- operador is null
+	SELECT * FROM senso
+	WHERE regiao IS NULL;
+	
+	-- preparando cenario is null
+	SELECT * FROM senso
+	WHERE regiao=' '
+	
+	UPDATE senso SET regiao=null
+	WHERE regiao=' ';
+	
+	UPDATE senso SET regiao=' '
+	WHERE regiao IS NULL;
+	
+	-- operador having
+	SELECT cod_uf, estado COUNT(*)qtd
+	FROM senso
+	WHERE ano='2014'
+	GROUP BY cod_uf HAVING COUNT (cod_mun)>500;
+	
+	
+	
+	
+	
+	
+	
+	
+	
